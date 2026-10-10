@@ -152,11 +152,44 @@ class SceneValidationTests(unittest.TestCase):
             finally:
                 os.chdir(previous)
 
-    def test_rejects_surrogate_text_before_creating_output(self):
+    def test_rejects_xml_disallowed_text_in_title_description_and_label(self):
+        cases = (("title", "\x00"), ("description", "\x01"), ("label", "\uffff"), ("title", "\ufffe"), ("label", "\ud800"))
+        for field, character in cases:
+            with self.subTest(field=field, codepoint=ord(character)):
+                scene = example_scene()
+                if field == "label":
+                    scene["parts"][0]["label"] = f"lamp {character}"
+                else:
+                    scene[field] = f"scene {character} text"
+                with self.assertRaises(foundry.SceneError):
+                    foundry.build_html(scene)
+
+    def test_accepts_xml_valid_character_boundaries(self):
+        boundary_text = "start\t\n\r " + "".join(chr(codepoint) for codepoint in (0x20, 0xD7FF, 0xE000, 0xFFFD, 0x10000, 0x10FFFF)) + " end"
         scene = example_scene()
-        scene["title"] = "bad \ud800"
-        with self.assertRaises(foundry.SceneError):
-            foundry.build_html(scene)
+        scene["title"] = boundary_text
+        scene["description"] = boundary_text
+        scene["parts"][0]["label"] = boundary_text
+        validated = foundry.validate_scene(scene)
+        self.assertTrue(validated["title"].startswith("start\t\n\r"))
+        self.assertIn(chr(0x10FFFF), validated["description"])
+        self.assertIn(chr(0xD7FF), validated["parts"][0]["label"])
+
+    def test_invalid_xml_text_fails_before_creating_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            scene = example_scene()
+            scene["description"] = "bad\x00text"
+            scene_path = root / "scene.json"
+            scene_path.write_text(json.dumps(scene), encoding="utf-8")
+            previous = Path.cwd()
+            os.chdir(root)
+            try:
+                with contextlib.redirect_stderr(io.StringIO()):
+                    self.assertEqual(foundry.main([str(scene_path), "figure.html"]), 2)
+                self.assertFalse((root / "figure.html").exists())
+            finally:
+                os.chdir(previous)
 
 
 class HtmlOutputTests(unittest.TestCase):
@@ -212,9 +245,14 @@ class HtmlOutputTests(unittest.TestCase):
             root = Path(directory)
             scene_path = root / "huge.json"
             scene_path.write_text(" " * (foundry.MAX_INPUT_BYTES + 1), encoding="utf-8")
-            with contextlib.redirect_stderr(io.StringIO()):
-                self.assertEqual(foundry.main([str(scene_path), "figure.html"]), 2)
-            self.assertFalse((root / "figure.html").exists())
+            previous = Path.cwd()
+            os.chdir(root)
+            try:
+                with contextlib.redirect_stderr(io.StringIO()):
+                    self.assertEqual(foundry.main([str(scene_path), "figure.html"]), 2)
+                self.assertFalse(Path("figure.html").exists())
+            finally:
+                os.chdir(previous)
 
 
 if __name__ == "__main__":

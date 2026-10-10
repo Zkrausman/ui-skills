@@ -40,11 +40,22 @@ def _text(value: Any, where: str, limit: int) -> str:
     if not isinstance(value, str) or not value.strip() or len(value) > limit:
         raise SceneError(f"{where} must be non-empty text up to {limit} characters")
     value = value.strip()
+    if any(not _is_xml_character(ord(character)) for character in value):
+        raise SceneError(f"{where} contains a character forbidden by XML 1.0")
     try:
         value.encode("utf-8")
     except UnicodeEncodeError:
         raise SceneError(f"{where} must be valid UTF-8 text") from None
     return value
+
+
+def _is_xml_character(codepoint: int) -> bool:
+    return (
+        codepoint in (0x09, 0x0A, 0x0D)
+        or 0x20 <= codepoint <= 0xD7FF
+        or 0xE000 <= codepoint <= 0xFFFD
+        or 0x10000 <= codepoint <= 0x10FFFF
+    )
 
 
 def _number(value: Any, where: str, low: float, high: float) -> float:
@@ -229,6 +240,7 @@ def _svg_points(points: list[tuple[float, float]], bounds: tuple[float, float, f
 
 def build_html(scene: Any) -> str:
     scene = validate_scene(scene)
+    keyboard_handler = Path(__file__).with_name("keyboard-handler.js").read_text(encoding="utf-8").strip()
     faces_by_part, bounds = _projected_parts(scene)
     frame = scene["frame"]
     svg_parts: list[str] = []
@@ -296,6 +308,7 @@ button:focus-visible {{ outline: 3px solid var(--ink); outline-offset: 3px; }}
 </svg>
 </main>
 <script>
+{keyboard_handler}
 (() => {{
   const root = document.documentElement;
   const parts = [...document.querySelectorAll('[data-part]')];
@@ -349,7 +362,7 @@ button:focus-visible {{ outline: 3px solid var(--ink); outline-offset: 3px; }}
   }});
   document.querySelector('.scene').addEventListener('keydown', (event) => {{
     const part = event.target.closest('[data-part][role="button"]');
-    if (part && (event.key === 'Enter' || event.key === ' ')) {{ event.preventDefault(); part.click(); }}
+    handlePartKeydown(event, part, togglePart);
   }});
   syncLights();
   syncMotion();
