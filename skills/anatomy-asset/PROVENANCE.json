@@ -1,0 +1,163 @@
+{
+  "upstream_repository": "https://github.com/Teddarific/skills",
+  "upstream_commit": "7e897b2c35b4b6c5a70410d9e4a976efa288d265",
+  "upstream_path": "skills/anatomy-asset",
+  "upstream_subtree": "bd7cf299cb8ae7fd92e97113a3c6f68160a22fea",
+  "license": "MIT, Copyright (c) 2026 Ryan",
+  "upstream_license_blob": "aa20733917ffc919b6b04834e6a6e22909df7c76",
+  "scope": "Reduced static SVG geometry/export, focused illustration guidance, one original template",
+  "excluded": [
+    "Browser-launch/capture/drive helpers and unsafe browser flags",
+    "All upstream examples, network-loading demos, media and tests",
+    "WebGL, React and turn/3D runtime extras",
+    "DOM/HTML preview helpers and animation helpers",
+    "Geometry audit subsystem; no collision-proof claim"
+  ],
+  "trust_boundary": "Code-authoring library, not a sanitizer or parser for untrusted SVG/CSS/scene source. Raw geometry and SVG are trusted authored code.",
+  "self_hash_note": "PROVENANCE.json is excluded from its own file hash list.",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "87c078ab9d90a3044f359e6b563d4e6afea7aa060897cf4f21618687b3856796",
+      "git_blob": "aa20733917ffc919b6b04834e6a6e22909df7c76",
+      "bytes": 1061,
+      "disposition": "unchanged",
+      "source_files": [
+        {
+          "path": "LICENSE",
+          "git_blob": "aa20733917ffc919b6b04834e6a6e22909df7c76"
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c136644b0a8bda9ce42a2a9b92bb6a6dc3df19b148cb3bb858b7f3e894f3c3dc",
+      "git_blob": "d885c95d0aca243ac9f1a91183ba34cac3d51e2a",
+      "bytes": 2904,
+      "disposition": "New reduced entrypoint replacing upstream broad workflow.",
+      "source_files": []
+    },
+    {
+      "path": "kit/asset.mjs",
+      "sha256": "3da31159669d1470f60986afc362440145c9f9fc88fe10bfbaa4660e0f078ebd",
+      "git_blob": "c5b4b773031734dcd8b05f354823f87fd200a31a",
+      "bytes": 10362,
+      "disposition": "Retained color ramps and region fitting; removed animation and HTML-preview helpers; restricted static exporter options and XML-escaped label/id/color/dimension boundaries.",
+      "source_files": [
+        {
+          "path": "kit/asset.mjs",
+          "git_blob": "3541d81632c1c7bfa04fde4000fb631c435c138a"
+        }
+      ]
+    },
+    {
+      "path": "kit/iso-kit.mjs",
+      "sha256": "3906c8c41f41720636d7b97948b8022c40f49604712d9c30067f3503a2cb39d8",
+      "git_blob": "822b0589abdd89318d22ac36df17518685abd79e",
+      "bytes": 32192,
+      "disposition": "Removed DOM hold helper, HTML/card/page functions and animation CSS; use shared XML-valid text escaping. Geometry and remaining static CSS retained.",
+      "source_files": [
+        {
+          "path": "kit/iso-kit.mjs",
+          "git_blob": "248ee01cc00dfaeee9d693f49f63e32913f03115"
+        }
+      ]
+    },
+    {
+      "path": "kit/lathe.mjs",
+      "sha256": "a4e7e974b1a37e603ad2b76363b6f9815cc101dfff0ad277a5d4e8f1dc56fccb",
+      "git_blob": "b2fb74dfda69aa6296152d76ec70f314ce2955f1",
+      "bytes": 48028,
+      "disposition": "unchanged",
+      "source_files": [
+        {
+          "path": "kit/lathe.mjs",
+          "git_blob": "b2fb74dfda69aa6296152d76ec70f314ce2955f1"
+        }
+      ]
+    },
+    {
+      "path": "kit/tube.mjs",
+      "sha256": "bcb3cc360f6d83e6a5753f4c464b4587ab7965028b05a5d58e285abce58667c9",
+      "git_blob": "94d1c84a7b7a1d1b1000de9ae3c84f53d093901a",
+      "bytes": 14230,
+      "disposition": "unchanged",
+      "source_files": [
+        {
+          "path": "kit/tube.mjs",
+          "git_blob": "94d1c84a7b7a1d1b1000de9ae3c84f53d093901a"
+        }
+      ]
+    },
+    {
+      "path": "kit/xml.mjs",
+      "sha256": "b2c239bdd1ef137f0d61eb5a32fe2ee47332337609af8b8b346b862e13c78dad",
+      "git_blob": "b755c8432113f322c7f5303b06253d03f29ae0f9",
+      "bytes": 635,
+      "disposition": "New shared XML 1.0 text validation/escaping.",
+      "source_files": []
+    },
+    {
+      "path": "references/api.md",
+      "sha256": "53597893b1e449ca55e60b3bb4215ef62c8fa2775bb5b48688c472d91071d2dd",
+      "git_blob": "2758c587e349e914a587a4d32e47c9e3e200d5fe",
+      "bytes": 3010,
+      "disposition": "Locally condensed documentation of retained static APIs and explicit trusted-source boundary.",
+      "source_files": [
+        {
+          "path": "references/kit.md",
+          "git_blob": "54aa02092ff042fcbaa0672da77a2b40d949dfbb"
+        },
+        {
+          "path": "kit/iso-kit.mjs",
+          "git_blob": "248ee01cc00dfaeee9d693f49f63e32913f03115"
+        },
+        {
+          "path": "kit/asset.mjs",
+          "git_blob": "3541d81632c1c7bfa04fde4000fb631c435c138a"
+        },
+        {
+          "path": "kit/lathe.mjs",
+          "git_blob": "b2fb74dfda69aa6296152d76ec70f314ce2955f1"
+        },
+        {
+          "path": "kit/tube.mjs",
+          "git_blob": "94d1c84a7b7a1d1b1000de9ae3c84f53d093901a"
+        }
+      ]
+    },
+    {
+      "path": "references/illustration.md",
+      "sha256": "e78f6704513293ecd695e59403c2e6694946832388bc82077c6ffa2542b4bc96",
+      "git_blob": "fdf0a4215afd4e834811ddeaf60879f880e7efa4",
+      "bytes": 2437,
+      "disposition": "Locally adapted SVG-only illustration guidance; no browser commands or missing audit claims.",
+      "source_files": [
+        {
+          "path": "references/concepts.md",
+          "git_blob": "420b7204033b52b52d4ba248939743aafca68adc"
+        },
+        {
+          "path": "references/composition.md",
+          "git_blob": "9b451c95fb369e85cf97c01151814bdac20c7f07"
+        },
+        {
+          "path": "references/brand.md",
+          "git_blob": "132fc2c245d47c2fcd8b995023aaafc311248743"
+        },
+        {
+          "path": "references/craft.md",
+          "git_blob": "935fa6653cf0dab173055f8396a5a0ee73711e8c"
+        }
+      ]
+    },
+    {
+      "path": "templates/build.mjs",
+      "sha256": "2b707004470a06166b93be8131fb79420e0fb0af8defb750b623f8ed7e7898e3",
+      "git_blob": "e484f531d70694f15c311359d922b4949139a9a5",
+      "bytes": 1954,
+      "disposition": "One new original local SVG template with explicit fresh-directory-only output.",
+      "source_files": []
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+name: Reduced Anatomy Asset checks
+on:
+  pull_request:
+    paths: ['skills/anatomy-asset/**', 'tests/anatomy-asset.test.mjs', 'tests/check_anatomy_asset.py', '.github/workflows/anatomy-asset.yml']
+  push:
+    branches: [main]
+    paths: ['skills/anatomy-asset/**', 'tests/anatomy-asset.test.mjs', 'tests/check_anatomy_asset.py', '.github/workflows/anatomy-asset.yml']
+permissions:
+  contents: read
+jobs:
+  svg-subset:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # verified v4
+        with:
+          persist-credentials: false
+      - name: Geometry and export checks
+        run: node --test tests/anatomy-asset.test.mjs
+      - name: Provenance, XML, offline output and no-overwrite checks
+        run: python3 tests/check_anatomy_asset.py
