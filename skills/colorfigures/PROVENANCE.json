@@ -1,0 +1,98 @@
+{
+  "source_url": "https://april-zhu.com/colorfigures/colorfigures.zip",
+  "source_zip_bytes": 80750,
+  "source_zip_sha256": "c5f05302d78db757859f7e9c563f20a5482f3cd07e5a44050486289e7fd80143",
+  "uncompressed_vendor_bytes": 217209,
+  "vendor_package": "colorfigures",
+  "license": "MIT; notices for April Zhu and Tolga Cohce retained verbatim in LICENSE",
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1281,
+      "sha256": "bc54cadb579906c051d7aad84f41f88c0df6c50089e052134226fe0b76fd5280",
+      "disposition": "unchanged vendor file",
+      "source_sha256": "bc54cadb579906c051d7aad84f41f88c0df6c50089e052134226fe0b76fd5280",
+      "source_bytes": 1281
+    },
+    {
+      "path": "README.md",
+      "bytes": 2317,
+      "sha256": "2818f4aa0c3bb3dd59865522a1d375fbe29101d95c492fc579ba94c5e9be342d",
+      "disposition": "unchanged vendor file",
+      "source_sha256": "2818f4aa0c3bb3dd59865522a1d375fbe29101d95c492fc579ba94c5e9be342d",
+      "source_bytes": 2317
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 16903,
+      "sha256": "abab5a439426dd72dcc00343d7606421fe3533fce6ced82cce03e246334e36ea",
+      "disposition": "Description value JSON/YAML-quoted for Codex; decoded text and instruction body unchanged",
+      "source_sha256": "5bf7e80eb4d31273dada38544b75cdee2c3667dc98a2c8565c509ef492ef1256",
+      "source_bytes": 16895,
+      "source_description_sha256": "6839298e8a12ca3dac36f1b53d23d6344954be6df367f9957f276e598f7869ce",
+      "source_body_sha256": "b35470c2af83ed29ebd8e094de85fa65823162a1e9f4df234404ea71dc26151b"
+    },
+    {
+      "path": "assets/core.js",
+      "bytes": 56076,
+      "sha256": "a78aab94ab7396b99080bf72673d5d4d689d771764d76cb08f1a0d28033f7fc3",
+      "disposition": "unchanged vendor file",
+      "source_sha256": "a78aab94ab7396b99080bf72673d5d4d689d771764d76cb08f1a0d28033f7fc3",
+      "source_bytes": 56076
+    },
+    {
+      "path": "assets/examples/claw.html",
+      "bytes": 66572,
+      "sha256": "6f478bc6471f0cfad58bf90e31b0f7834c3163ce2df334ca30e2b8dbda42c129",
+      "disposition": "Bound URL bay count to a finite positive integer no greater than available prizes",
+      "source_sha256": "aca6069e1b0c472a1aee556aabb28dbefd77db1d62bc3df6aaebf6fd8b11d36f",
+      "source_bytes": 66362,
+      "source_replacements": [
+        {
+          "original": "    if (q.has('bay')){ const n = +q.get('bay'); for (let i = 0; i < n; i++){ const p = st.prizes.pop(); st.bay.push(p); } st.won = 0; }",
+          "adapted": "    function boundedBayCount(raw, available) {\n      const n = Number(raw);\n      return Number.isFinite(n) && Number.isInteger(n) && n > 0 ? Math.min(n, available) : 0;\n    }\n    if (q.has('bay')){ const n = boundedBayCount(q.get('bay'), st.prizes.length); for (let i = 0; i < n; i++){ const p = st.prizes.pop(); st.bay.push(p); } st.won = 0; }"
+        }
+      ]
+    },
+    {
+      "path": "assets/examples/lamp.html",
+      "bytes": 30001,
+      "sha256": "8db118ca548e79f2aeab94b6601ca4dc1c83b9b89c1810232bcaea4fda0b281b",
+      "disposition": "unchanged vendor file",
+      "source_sha256": "8db118ca548e79f2aeab94b6601ca4dc1c83b9b89c1810232bcaea4fda0b281b",
+      "source_bytes": 30001
+    },
+    {
+      "path": "assets/examples/toaster.html",
+      "bytes": 29735,
+      "sha256": "685e9e297fdc8f7104d2d3f04325bbbc567b76941934a8c37c6e127ab1cd9950",
+      "disposition": "unchanged vendor file",
+      "source_sha256": "685e9e297fdc8f7104d2d3f04325bbbc567b76941934a8c37c6e127ab1cd9950",
+      "source_bytes": 29735
+    },
+    {
+      "path": "scripts/build.py",
+      "bytes": 14542,
+      "sha256": "364b3028aed6980811ad49ac3c39725c4b901ef85dc0aa6b778fe612ae104ee4",
+      "disposition": "unchanged vendor file",
+      "source_sha256": "364b3028aed6980811ad49ac3c39725c4b901ef85dc0aa6b778fe612ae104ee4",
+      "source_bytes": 14542
+    }
+  ],
+  "local_additions": [
+    "PROVENANCE.json"
+  ],
+  "vendor_modifications": [
+    {
+      "path": "SKILL.md",
+      "reason": "Official unquoted description contains colon-space and fails supported Codex YAML validation; quoting only preserves the decoded description and body."
+    },
+    {
+      "path": "assets/examples/claw.html",
+      "reason": "Independent review found unbounded URL-controlled bay loop; reject non-finite/non-integer counts and cap valid counts at current prize inventory."
+    }
+  ],
+  "execution_boundary": "Trusted authored HTML/JavaScript, not sanitized untrusted input. The standard-library Python builder reads its input and bundled core.js, then overwrites the supplied output path. Use only fresh bounded output paths.",
+  "activation_boundary": "Repository import and installation copy source only; neither is browser validation. No additional runtime or package installation, existing user-browser/profile use, or changes to security/trust are authorized by this package. Follow current user/tool restrictions.",
+  "validation_limits": "No browser rendering, interaction, animation, or mobile appearance validation is claimed."
+}

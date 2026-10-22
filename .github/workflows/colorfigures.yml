@@ -1,0 +1,19 @@
+name: Colorfigures package checks
+on:
+  pull_request:
+    paths: ['skills/colorfigures/**', 'tests/check_colorfigures.py', '.github/workflows/colorfigures.yml']
+  push:
+    branches: [main]
+    paths: ['skills/colorfigures/**', 'tests/check_colorfigures.py', '.github/workflows/colorfigures.yml']
+permissions:
+  contents: read
+jobs:
+  pinned-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Pinned files, trusted example builds and script syntax
+        run: python3 tests/check_colorfigures.py
