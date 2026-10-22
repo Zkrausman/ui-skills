@@ -954,7 +954,11 @@ ui = mountFigure({
     if (q.has('claw')){ const [x, y] = q.get('claw').split(',').map(Number); st.claw.x = clampX(x); st.claw.y = clampY(y); }
     if (q.get('play') === '1'){ st.phase = 'play'; st.time = +(q.get('time') || GAME_T); st.tokens = 9; }
     if (q.get('drop') === '1'){ st.phase = 'play'; st.time = 9; st.tokens = 9; startDrop(); }
-    if (q.has('bay')){ const n = +q.get('bay'); for (let i = 0; i < n; i++){ const p = st.prizes.pop(); st.bay.push(p); } st.won = 0; }
+    function boundedBayCount(raw, available) {
+      const n = Number(raw);
+      return Number.isFinite(n) && Number.isInteger(n) && n > 0 ? Math.min(n, available) : 0;
+    }
+    if (q.has('bay')){ const n = boundedBayCount(q.get('bay'), st.prizes.length); for (let i = 0; i < n; i++){ const p = st.prizes.pop(); st.bay.push(p); } st.won = 0; }
     if (q.get('flap') === '1') st.flap = st.flapT = 1;
     if (q.has('chute')){ const p = st.prizes.splice(3, 1)[0]; st.falls.push({ p, x:HOME[0], y:HOME[1], z:+q.get('chute'), vz:0, tx:HOME[0], ty:HOME[1], tz:-99, mode:'chute', delay:0 }); }
     if (q.has('open')) st.claw.o = +q.get('open');

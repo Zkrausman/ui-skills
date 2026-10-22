@@ -42,11 +42,17 @@
     },
     {
       "path": "assets/examples/claw.html",
-      "bytes": 66362,
-      "sha256": "aca6069e1b0c472a1aee556aabb28dbefd77db1d62bc3df6aaebf6fd8b11d36f",
-      "disposition": "unchanged vendor file",
+      "bytes": 66572,
+      "sha256": "6f478bc6471f0cfad58bf90e31b0f7834c3163ce2df334ca30e2b8dbda42c129",
+      "disposition": "Bound URL bay count to a finite positive integer no greater than available prizes",
       "source_sha256": "aca6069e1b0c472a1aee556aabb28dbefd77db1d62bc3df6aaebf6fd8b11d36f",
-      "source_bytes": 66362
+      "source_bytes": 66362,
+      "source_replacements": [
+        {
+          "original": "    if (q.has('bay')){ const n = +q.get('bay'); for (let i = 0; i < n; i++){ const p = st.prizes.pop(); st.bay.push(p); } st.won = 0; }",
+          "adapted": "    function boundedBayCount(raw, available) {\n      const n = Number(raw);\n      return Number.isFinite(n) && Number.isInteger(n) && n > 0 ? Math.min(n, available) : 0;\n    }\n    if (q.has('bay')){ const n = boundedBayCount(q.get('bay'), st.prizes.length); for (let i = 0; i < n; i++){ const p = st.prizes.pop(); st.bay.push(p); } st.won = 0; }"
+        }
+      ]
     },
     {
       "path": "assets/examples/lamp.html",
@@ -80,6 +86,10 @@
     {
       "path": "SKILL.md",
       "reason": "Official unquoted description contains colon-space and fails supported Codex YAML validation; quoting only preserves the decoded description and body."
+    },
+    {
+      "path": "assets/examples/claw.html",
+      "reason": "Independent review found unbounded URL-controlled bay loop; reject non-finite/non-integer counts and cap valid counts at current prize inventory."
     }
   ],
   "execution_boundary": "Trusted authored HTML/JavaScript, not sanitized untrusted input. The standard-library Python builder reads its input and bundled core.js, then overwrites the supplied output path. Use only fresh bounded output paths.",

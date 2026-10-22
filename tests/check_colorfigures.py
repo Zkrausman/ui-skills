@@ -1,7 +1,7 @@
 """Check the pinned package and build trusted examples only into new scratch outputs.
 
-Uses standard-library Python and existing Node syntax checking. No browser or package
-installation, and no execution of the bundled browser JavaScript.
+Uses standard-library Python and existing Node. Only the new pure query-bound helper
+executes in an isolated Node VM; no browser application code or DOM is executed.
 """
 import ast
 import hashlib
@@ -73,14 +73,20 @@ def main():
         data = (SKILL / row["path"]).read_bytes()
         assert len(data) == row["bytes"], row["path"]
         assert hashlib.sha256(data).hexdigest() == row["sha256"], row["path"]
-        if row["path"] != "SKILL.md":
+        if row["path"] not in {"SKILL.md", "assets/examples/claw.html"}:
             assert row["sha256"] == row["source_sha256"], row["path"]
-        else:
+        elif row["path"] == "SKILL.md":
             text = data.decode()
             front, body = text.split("\n---\n", 1)
             description = json.loads(next(line.removeprefix("description: ") for line in front.splitlines() if line.startswith("description: ")))
             assert hashlib.sha256(description.encode()).hexdigest() == row["source_description_sha256"]
             assert hashlib.sha256(body.encode()).hexdigest() == row["source_body_sha256"]
+        else:
+            restored = data.decode()
+            for replacement in reversed(row["source_replacements"]):
+                assert restored.count(replacement["adapted"]) == 1
+                restored = restored.replace(replacement["adapted"], replacement["original"], 1)
+            assert hashlib.sha256(restored.encode()).hexdigest() == row["source_sha256"]
     assert sum(row["source_bytes"] for row in manifest["files"]) == 217209
     license_text = (SKILL / "LICENSE").read_text()
     assert "MIT License" in license_text and "April Zhu" in license_text and "Tolga Cohce" in license_text
@@ -97,6 +103,18 @@ def main():
     builds = []
     with tempfile.TemporaryDirectory(prefix="colorfigures-gate-") as scratch_name:
         scratch = Path(scratch_name)
+        claw = (SKILL / "assets/examples/claw.html").read_text()
+        helper = re.search(r"function boundedBayCount\(raw, available\) \{[\s\S]*?\n    \}", claw).group(0)
+        regression = scratch / "bay-regression.cjs"
+        regression.write_text(
+            'const assert = require("node:assert/strict");\nconst vm = require("node:vm");\nconst scope = {};\n'
+            + 'vm.runInNewContext(' + json.dumps(helper + '\nthis.count = boundedBayCount;') + ', scope);\n'
+            + 'const cases = [["Infinity",5,0],["-Infinity",5,0],["NaN",5,0],["invalid",5,0],["-1",5,0],["1.5",5,0],["",5,0],[null,5,0],["0",5,0],["1",5,1],["3",5,3],["99",5,5],["1e308",5,5],["1",0,0]];\n'
+            + 'for (const [raw, available, expected] of cases) { const n = scope.count(raw, available); assert.equal(n, expected); const prizes = Array.from({length: available}, (_, i) => i); const bay = []; for (let i=0;i<n;i++) bay.push(prizes.pop()); assert.ok(bay.length <= available); assert.ok(!bay.includes(undefined)); }\n'
+            + 'console.log(JSON.stringify({url_bay_cases: cases.length, bounded: true}));\n'
+        )
+        regression_result = json.loads(run(["node", str(regression)]).stdout)
+        assert regression_result == {"url_bay_cases": 14, "bounded": True}
         for name in ("claw", "lamp", "toaster"):
             source = SKILL / f"assets/examples/{name}.html"
             output = scratch / f"{name}-built.html"
@@ -121,7 +139,7 @@ def main():
         assert not rejected.exists()
         result = subprocess.run([sys.executable, str(builder), str(invalid), str(rejected)], cwd=scratch, capture_output=True, text=True, timeout=30)
         assert result.returncode != 0 and not rejected.exists()
-    print(json.dumps({"vendor_files_unchanged": 7, "skill_frontmatter_quoted_only": True, "provenance_valid": True, "license_notices_retained": True, "builds": builds, "missing_marker_rejected_without_output": True, "all_build_targets_were_fresh": True, "browser_js_executed": False, "browser_validation": "unrun"}))
+    print(json.dumps({"vendor_files_unchanged": 6, "skill_frontmatter_quoted_only": True, "claw_bay_patch_reversible_to_source": True, "isolated_query_helper": regression_result, "provenance_valid": True, "license_notices_retained": True, "builds": builds, "missing_marker_rejected_without_output": True, "all_build_targets_were_fresh": True, "browser_application_executed": False, "browser_validation": "unrun"}))
 
 
 if __name__ == "__main__":
