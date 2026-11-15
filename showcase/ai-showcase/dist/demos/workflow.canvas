@@ -1,0 +1,47 @@
+{
+  "nodes": [
+    {
+      "id": "idea",
+      "type": "text",
+      "text": "Idea: a reusable interactive explanation",
+      "x": 0,
+      "y": 0,
+      "width": 260,
+      "height": 140
+    },
+    {
+      "id": "evidence",
+      "type": "text",
+      "text": "Evidence: real skill export and a verified interaction",
+      "x": 340,
+      "y": 0,
+      "width": 260,
+      "height": 140
+    },
+    {
+      "id": "decision",
+      "type": "text",
+      "text": "Decision: retain provenance and publish privately",
+      "x": 680,
+      "y": 0,
+      "width": 260,
+      "height": 140
+    }
+  ],
+  "edges": [
+    {
+      "id": "idea-evidence",
+      "fromNode": "idea",
+      "fromSide": "right",
+      "toNode": "evidence",
+      "toSide": "left"
+    },
+    {
+      "id": "evidence-decision",
+      "fromNode": "evidence",
+      "fromSide": "right",
+      "toNode": "decision",
+      "toSide": "left"
+    }
+  ]
+}
