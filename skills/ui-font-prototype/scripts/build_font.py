@@ -77,9 +77,8 @@ def main(argv=None):
         if len(reopened.getBestCmap()) != 95:
             raise ValueError('Generated font failed coverage reopening')
     title = html.escape(args.family)
-    sample = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789 !? @#$% &* () [] {}\nIl1 O0 rn m — unsupported em dash intentionally uses fallback\nThe quick brown fox jumps over the lazy dog.'
     # Use only promised ASCII in the actual comparison; labels use system fonts.
-    sample = sample.replace(' — unsupported em dash intentionally uses fallback', '')
+    sample = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789 !? @#$% &* () [] {}\nIl1 O0 rn m\nThe quick brown fox jumps over the lazy dog.'
     page = ('<!doctype html><meta charset="utf-8"><title>' + title + '</title>'
             '<style>@font-face{font-family:Prototype;src:url(data:font/ttf;base64,'
             + base64.b64encode(data).decode() + ')}body{margin:2rem;font:16px sans-serif}'
