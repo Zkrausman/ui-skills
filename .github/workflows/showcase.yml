@@ -1,0 +1,19 @@
+name: Public AI showcase source
+on:
+  pull_request:
+    paths: ['showcase/**', 'tests/check_showcase.py', '.github/workflows/showcase.yml']
+  push:
+    branches: [main]
+    paths: ['showcase/**', 'tests/check_showcase.py', '.github/workflows/showcase.yml']
+permissions:
+  contents: read
+jobs:
+  public-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Public source, licensed assets, script syntax and gallery interaction contracts
+        run: python3 tests/check_showcase.py

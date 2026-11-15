@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Night-shift switchboard · Isometric Foundry</title>
+<style>
+:root { color-scheme: dark; --paper: #111b20; --ink: #e4f0e7; --muted: color-mix(in srgb, var(--ink) 68%, var(--paper)); --line: color-mix(in srgb, var(--ink) 22%, transparent); --glow: 0.45; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font: 16px/1.5 system-ui, sans-serif; }
+main { width: min(100%, 1040px); margin: 0 auto; padding: clamp(1rem, 4vw, 2.5rem); }
+h1 { margin: 0; font-size: clamp(1.35rem, 4vw, 2.2rem); line-height: 1.15; }
+.description { max-width: 68ch; color: var(--muted); }
+.scene { width: 100%; height: auto; display: block; overflow: visible; }
+.face { stroke-width: 1.25; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.glow { opacity: 0; filter: blur(5px); pointer-events: none; transition: opacity 180ms ease; }
+.part.is-lit .glow { opacity: var(--glow); animation: pulse 2.8s ease-in-out infinite alternate; }
+.part[role="button"] { cursor: pointer; outline: none; }
+.part[role="button"]:focus-visible .face { stroke: var(--ink); stroke-width: 3; }
+@keyframes pulse { from { opacity: .24; } to { opacity: var(--glow); } }
+.controls { display: flex; flex-wrap: wrap; gap: .65rem; margin-block: 1rem; }
+button { min-height: 2.75rem; border: 1px solid var(--line); border-radius: .45rem; padding: .55rem .9rem; background: transparent; color: var(--ink); font: inherit; cursor: pointer; }
+button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.status { min-height: 1.5em; color: var(--muted); }
+.motion-paused .glow { animation: none !important; }
+@media (prefers-reduced-motion: reduce) { :root:not(.motion-opt-in) *, :root:not(.motion-opt-in) *::before, :root:not(.motion-opt-in) *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Night-shift switchboard</h1>
+<p class="description">Three independent light modules. Select a module, toggle all lights, pause motion or reset. A real Isometric Foundry export.</p>
+<div class="controls" aria-label="Figure controls">
+  <button type="button" id="toggle-lights" aria-pressed="false">Turn lights on</button>
+  <button type="button" id="reset-scene">Reset</button>
+  <button type="button" id="toggle-motion" aria-pressed="false">Resume motion</button>
+</div>
+<p id="status" class="status" aria-live="polite">Use the controls or focus a marked part.</p>
+<svg class="scene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="group" aria-label="Interactive isometric figure: Night-shift switchboard">
+  <title>Night-shift switchboard</title>
+  <desc>Three independent light modules. Select a module, toggle all lights, pause motion or reset. A real Isometric Foundry export.</desc>
+  <g class="part" data-part="base" data-initial-lit="false" role="group" aria-label="Base"><title>Base</title><polygon class="face" points="862.59,414.34 575.65,580.00 575.65,533.98 862.59,368.32" fill="#1b3035" stroke="#789b9e"/><polygon class="glow" points="862.59,414.34 575.65,580.00 575.65,533.98 862.59,368.32" fill="#addbba" aria-hidden="true"/><polygon class="face" points="97.41,303.89 575.65,580.00 575.65,533.98 97.41,257.88" fill="#263e43" stroke="#789b9e"/><polygon class="glow" points="97.41,303.89 575.65,580.00 575.65,533.98 97.41,257.88" fill="#addbba" aria-hidden="true"/><polygon class="face" points="384.35,92.21 862.59,368.32 575.65,533.98 97.41,257.88" fill="#334d51" stroke="#789b9e"/><polygon class="glow" points="384.35,92.21 862.59,368.32 575.65,533.98 97.41,257.88" fill="#addbba" aria-hidden="true"/></g><g class="part is-lit" data-part="lamp-0" data-initial-lit="true" role="button" aria-label="Module 1" tabindex="0" aria-pressed="true"><title>Module 1</title><polygon class="face" points="448.12,203.58 288.71,295.61 288.71,207.26 448.12,115.22" fill="#426b58" stroke="#ccedc8"/><polygon class="glow" points="448.12,203.58 288.71,295.61 288.71,207.26 448.12,115.22" fill="#b8ee87" aria-hidden="true"/><polygon class="face" points="193.06,240.39 288.71,295.61 288.71,207.26 193.06,152.04" fill="#618f70" stroke="#ccedc8"/><polygon class="glow" points="193.06,240.39 288.71,295.61 288.71,207.26 193.06,152.04" fill="#b8ee87" aria-hidden="true"/><polygon class="face" points="352.47,60.00 448.12,115.22 288.71,207.26 193.06,152.04" fill="#9fd4a3" stroke="#ccedc8"/><polygon class="glow" points="352.47,60.00 448.12,115.22 288.71,207.26 193.06,152.04" fill="#b8ee87" aria-hidden="true"/></g><g class="part" data-part="lamp-1" data-initial-lit="false" role="button" aria-label="Module 2" tabindex="0" aria-pressed="false"><title>Module 2</title><polygon class="face" points="607.53,295.61 448.12,387.65 448.12,299.29 607.53,207.26" fill="#426b58" stroke="#ccedc8"/><polygon class="glow" points="607.53,295.61 448.12,387.65 448.12,299.29 607.53,207.26" fill="#b8ee87" aria-hidden="true"/><polygon class="face" points="352.47,332.43 448.12,387.65 448.12,299.29 352.47,244.07" fill="#618f70" stroke="#ccedc8"/><polygon class="glow" points="352.47,332.43 448.12,387.65 448.12,299.29 352.47,244.07" fill="#b8ee87" aria-hidden="true"/><polygon class="face" points="511.88,152.04 607.53,207.26 448.12,299.29 352.47,244.07" fill="#9fd4a3" stroke="#ccedc8"/><polygon class="glow" points="511.88,152.04 607.53,207.26 448.12,299.29 352.47,244.07" fill="#b8ee87" aria-hidden="true"/></g><g class="part" data-part="lamp-2" data-initial-lit="false" role="button" aria-label="Module 3" tabindex="0" aria-pressed="false"><title>Module 3</title><polygon class="face" points="766.94,387.65 607.53,479.68 607.53,391.33 766.94,299.29" fill="#426b58" stroke="#ccedc8"/><polygon class="glow" points="766.94,387.65 607.53,479.68 607.53,391.33 766.94,299.29" fill="#b8ee87" aria-hidden="true"/><polygon class="face" points="511.88,424.46 607.53,479.68 607.53,391.33 511.88,336.11" fill="#618f70" stroke="#ccedc8"/><polygon class="glow" points="511.88,424.46 607.53,479.68 607.53,391.33 511.88,336.11" fill="#b8ee87" aria-hidden="true"/><polygon class="face" points="671.29,244.07 766.94,299.29 607.53,391.33 511.88,336.11" fill="#9fd4a3" stroke="#ccedc8"/><polygon class="glow" points="671.29,244.07 766.94,299.29 607.53,391.33 511.88,336.11" fill="#b8ee87" aria-hidden="true"/></g>
+</svg>
+</main>
+<script>
+function handlePartKeydown(event, part, togglePart) {
+  if (!part || (event.key !== "Enter" && event.key !== " ")) return false;
+  event.preventDefault();
+  togglePart(part);
+  return true;
+}
+(() => {
+  const root = document.documentElement;
+  const parts = [...document.querySelectorAll('[data-part]')];
+  const lights = document.getElementById('toggle-lights');
+  const reset = document.getElementById('reset-scene');
+  const motion = document.getElementById('toggle-motion');
+  const status = document.getElementById('status');
+  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let motionOn = !preference.matches;
+  const setLit = (part, on) => {
+    part.classList.toggle('is-lit', on);
+    if (part.getAttribute('role') === 'button') part.setAttribute('aria-pressed', String(on));
+  };
+  const syncLights = () => {
+    const allLit = parts.length > 0 && parts.every((part) => part.classList.contains('is-lit'));
+    lights.setAttribute('aria-pressed', String(allLit));
+    lights.textContent = allLit ? 'Turn lights off' : 'Turn lights on';
+  };
+  const report = (message) => { status.textContent = message; };
+  const syncMotion = () => {
+    root.classList.toggle('motion-paused', !motionOn);
+    root.classList.toggle('motion-opt-in', motionOn && preference.matches);
+    motion.setAttribute('aria-pressed', String(motionOn));
+    motion.textContent = motionOn ? 'Pause motion' : (preference.matches ? 'Enable motion' : 'Resume motion');
+  };
+  const togglePart = (part) => {
+    const on = !part.classList.contains('is-lit');
+    setLit(part, on);
+    syncLights();
+    report(part.getAttribute('aria-label') + (on ? ' on' : ' off'));
+  };
+  lights.addEventListener('click', () => {
+    const turnOn = parts.some((part) => !part.classList.contains('is-lit'));
+    parts.forEach((part) => setLit(part, turnOn));
+    syncLights();
+    report(turnOn ? 'All lights on' : 'All lights off');
+  });
+  reset.addEventListener('click', () => {
+    parts.forEach((part) => setLit(part, part.dataset.initialLit === 'true'));
+    syncLights();
+    report('Figure reset');
+  });
+  motion.addEventListener('click', () => { motionOn = !motionOn; syncMotion(); report(motionOn ? 'Motion resumed' : 'Motion paused'); });
+  preference.addEventListener('change', (event) => {
+    if (event.matches) motionOn = false;
+    syncMotion();
+  });
+  document.querySelector('.scene').addEventListener('click', (event) => {
+    const part = event.target.closest('[data-part][role="button"]');
+    if (part) togglePart(part);
+  });
+  document.querySelector('.scene').addEventListener('keydown', (event) => {
+    const part = event.target.closest('[data-part][role="button"]');
+    handlePartKeydown(event, part, togglePart);
+  });
+  syncLights();
+  syncMotion();
+})();
+</script>
+</body>
+</html>

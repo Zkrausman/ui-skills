@@ -1,6 +1,14 @@
-# UI Skills
+# AI Skills
 
-Private collection of skills and UI toolkits.
+Reusable AI skill source and related showcase source. The existing `Zkrausman/ui-skills` repository URL and every existing `skills/*` package path are retained for compatibility. Repository visibility is managed separately; this documentation does not change access.
+
+[Catalog](catalog.json) · [Storage and deployment inventory](docs/storage.md) · [Contribution and review](CONTRIBUTING.md)
+
+Source storage, skill activation and generated artifacts are separate operations. Storing a package here does not install it or activate every skill. Generated fonts, specimens, private notes and credentials are not repository source.
+
+## Portable diagrams
+
+- [`skills/json-canvas`](skills/json-canvas): the supplied personal cloud adaptation for editable `.canvas` diagrams, preserved with format guidance, reconciled upstream MIT notice and an explicit [provenance record](skills/json-canvas/PROVENANCE.json). This stores reusable source; it neither installs Obsidian nor changes the existing cloud deployment.
 
 ## Original font prototypes
 

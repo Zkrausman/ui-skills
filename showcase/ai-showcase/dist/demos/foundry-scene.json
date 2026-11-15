@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "title": "Night-shift switchboard",
+  "description": "Three independent light modules. Select a module, toggle all lights, pause motion or reset. A real Isometric Foundry export.",
+  "frame": {
+    "width": 960,
+    "height": 640,
+    "margin": 60
+  },
+  "projection": {
+    "azimuth": 45,
+    "elevation": 35.264
+  },
+  "palette": {
+    "background": "#111b20",
+    "ink": "#e4f0e7"
+  },
+  "materials": {
+    "base": {
+      "top": "#334d51",
+      "x_face": "#1b3035",
+      "y_face": "#263e43",
+      "outline": "#789b9e",
+      "glow": "#addbba"
+    },
+    "lamp": {
+      "top": "#9fd4a3",
+      "x_face": "#426b58",
+      "y_face": "#618f70",
+      "outline": "#ccedc8",
+      "glow": "#b8ee87"
+    }
+  },
+  "parts": [
+    {
+      "id": "base",
+      "label": "Base",
+      "center": [
+        0,
+        0,
+        -20
+      ],
+      "size": [
+        300,
+        180,
+        25
+      ],
+      "material": "base",
+      "interactive": false,
+      "lit": false
+    },
+    {
+      "id": "lamp-0",
+      "label": "Module 1",
+      "center": [
+        -100,
+        0,
+        16
+      ],
+      "size": [
+        60,
+        100,
+        48
+      ],
+      "material": "lamp",
+      "interactive": true,
+      "lit": true
+    },
+    {
+      "id": "lamp-1",
+      "label": "Module 2",
+      "center": [
+        0,
+        0,
+        16
+      ],
+      "size": [
+        60,
+        100,
+        48
+      ],
+      "material": "lamp",
+      "interactive": true,
+      "lit": false
+    },
+    {
+      "id": "lamp-2",
+      "label": "Module 3",
+      "center": [
+        100,
+        0,
+        16
+      ],
+      "size": [
+        60,
+        100,
+        48
+      ],
+      "material": "lamp",
+      "interactive": true,
+      "lit": false
+    }
+  ]
+}

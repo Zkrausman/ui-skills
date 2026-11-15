@@ -1,0 +1,25 @@
+{
+  "source_kind": "Supplied two-file personal cloud adaptation, preserved as text handoff; not a complete package-byte migration",
+  "upstream_repository": "https://github.com/obsidianmd/obsidian-skills",
+  "adaptation_inspected_date": "2026-11-14",
+  "license_reconciliation_commit": "398127736bd4ba42d767b1419fee1a927508370b",
+  "license_reconciliation_path": "LICENSE",
+  "license_sha256": "64c64d48361edfe8610016441bf593256ea9b67f133b00f47c55aa29ee878567",
+  "license_copyright": "Copyright (c) 2026 Steph Ango (@kepano)",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "a609bab03ede1349480146e1bb46da57f1b95b43cd81fe4d765505c3fe17048f"
+    },
+    {
+      "path": "references/format.md",
+      "sha256": "5c14cc383fa7197ce5c0575768325e25e9dd7bd8ba7438d7ce0ec7349bd71848"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "64c64d48361edfe8610016441bf593256ea9b67f133b00f47c55aa29ee878567"
+    }
+  ],
+  "reconciliation_limits": "Cloud LICENSE was not readable via the source API; the exact verified upstream MIT license is supplied here. No assertion that the cloud package bytes or original historical upstream commit were recovered.",
+  "activation": "Storage only. Existing personal cloud skill is preserved; no Linux activation, app installation or vault sync."
+}

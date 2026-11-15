@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "display_name": "AI Skills",
+  "repository": "https://github.com/Zkrausman/ui-skills",
+  "compatibility": "Repository URL and existing package paths are stable. Catalog entries do not imply activation.",
+  "skills": [
+    {
+      "name": "anatomy",
+      "path": "skills/anatomy",
+      "purpose": "Reusable UI figure toolkit",
+      "source_kind": "unchanged upstream import",
+      "provenance": "README.md",
+      "license_path": "skills/anatomy/LICENSE",
+      "license_status": "MIT",
+      "upstream": "https://github.com/wheresryan22/anatomy",
+      "upstream_commit": "dbf697a527bbf7d358668e1557cb1e35ff725d46"
+    },
+    {
+      "name": "isometric-foundry",
+      "path": "skills/isometric-foundry",
+      "purpose": "Original offline interactive isometric figures",
+      "source_kind": "independent owner-requested rebuild",
+      "provenance": "skills/isometric-foundry/THIRD_PARTY_NOTICES.md",
+      "license_status": "Original package license not explicitly specified; MIT third-party notice retained",
+      "third_party_notice": "skills/isometric-foundry/THIRD_PARTY_NOTICES.md"
+    },
+    {
+      "name": "colorfigures",
+      "path": "skills/colorfigures",
+      "purpose": "Hand-inked interactive isometric figures",
+      "source_kind": "pinned upstream package with two documented local patches",
+      "provenance": "skills/colorfigures/PROVENANCE.json",
+      "license_path": "skills/colorfigures/LICENSE",
+      "license_status": "MIT"
+    },
+    {
+      "name": "ui-font-prototype",
+      "path": "skills/ui-font-prototype",
+      "purpose": "Original ASCII geometric display-font prototypes",
+      "source_kind": "original owner-requested reusable source",
+      "provenance": "skills/ui-font-prototype/SOURCE.md",
+      "license_path": "skills/ui-font-prototype/LICENSE",
+      "license_status": "MIT source; generated-font distribution terms chosen separately"
+    },
+    {
+      "name": "json-canvas",
+      "path": "skills/json-canvas",
+      "purpose": "Portable editable diagrams in JSON Canvas 1.0",
+      "source_kind": "supplied personal cloud adaptation with reconciled upstream notice",
+      "provenance": "skills/json-canvas/PROVENANCE.json",
+      "license_path": "skills/json-canvas/LICENSE",
+      "license_status": "MIT upstream notice preserved; bounded adaptation, not plugin migration"
+    }
+  ],
+  "showcases": [
+    {
+      "name": "ai-showcase",
+      "path": "showcase/ai-showcase",
+      "purpose": "Public-safe static skill examples and licensed font specimens",
+      "source_kind": "Sanitized frozen source handoff",
+      "provenance": "showcase/ai-showcase/PROVENANCE.json",
+      "license_status": "Per-component notices; OFL font binaries; no blanket license assignment",
+      "deployment": "Source only; no project binding or automatic deployment"
+    }
+  ]
+}

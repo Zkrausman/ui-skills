@@ -1,0 +1,19 @@
+name: AI skills source catalog
+on:
+  pull_request:
+    paths: ['catalog.json', 'README.md', 'CONTRIBUTING.md', 'docs/**', 'skills/**/SKILL.md', 'skills/json-canvas/**', 'tests/check_catalog.py', '.github/workflows/catalog.yml']
+  push:
+    branches: [main]
+    paths: ['catalog.json', 'README.md', 'CONTRIBUTING.md', 'docs/**', 'skills/**/SKILL.md', 'skills/json-canvas/**', 'tests/check_catalog.py', '.github/workflows/catalog.yml']
+permissions:
+  contents: read
+jobs:
+  source-catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Catalog paths, ownership records and JSON Canvas handoff hashes
+        run: python3 tests/check_catalog.py
