@@ -2,6 +2,10 @@
 
 Private collection of skills and UI toolkits.
 
+## Original font prototypes
+
+- [`skills/ui-font-prototype`](skills/ui-font-prototype): original ASCII glyph geometry, reusable geometric TTF generator, SVG outline sheet and structural checker. Standard-library preview works without dependencies; binary generation/checking requires already installed FontTools. Experimental display prototypes only, with no production body-font qualification. No personal font binaries or specimens are included.
+
 ## Imported skills
 
 - [`skills/colorfigures`](skills/colorfigures): the complete eight-file [Colorfigures package](https://april-zhu.com/colorfigures) from its official ZIP (SHA-256 `c5f05302d78db757859f7e9c563f20a5482f3cd07e5a44050486289e7fd80143`), plus a local [provenance manifest](skills/colorfigures/PROVENANCE.json). Local adaptations quote the description for Codex YAML compatibility and bound the claw example's URL-controlled bay count. The decoded description, instruction body, engine, builder, other examples, and MIT notices for April Zhu and Tolga Cohce are preserved. Its Python builder packages trusted figure code into interactive HTML; it is not an untrusted-HTML sanitizer. Browser QA is a separate validation step.

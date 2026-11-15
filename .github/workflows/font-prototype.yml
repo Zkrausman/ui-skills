@@ -1,0 +1,19 @@
+name: Original font prototype checks
+on:
+  pull_request:
+    paths: ['skills/ui-font-prototype/**', 'tests/check_font_prototype.py', '.github/workflows/font-prototype.yml']
+  push:
+    branches: [main]
+    paths: ['skills/ui-font-prototype/**', 'tests/check_font_prototype.py', '.github/workflows/font-prototype.yml']
+permissions:
+  contents: read
+jobs:
+  geometry-and-boundaries:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Original geometry and no-overwrite boundaries; binary checks require existing FontTools
+        run: python3 -B tests/check_font_prototype.py
